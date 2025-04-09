@@ -10,6 +10,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping()
 public class UsuarioController {
@@ -24,13 +30,22 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<String> create(
-            @RequestBody UsuarioDto usuarioDto
-    ) {
-
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(createUserService.execute(usuarioDto));
-    }
+    @Operation(
+            summary = "Crear usuario",
+            description = "Registra un nuevo usuario en el sistema con CI, nombre, y telefono.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "201",
+                            description = "Usuario agregado",
+                            content = @Content(schema = @Schema(implementation = String.class))
+                    ),
+                    @ApiResponse(
+                            responseCode = "400",
+                            description = "credenciales incorrectas o duplicadas",
+                            content = @Content(schema = @Schema(implementation = String.class))
+                    )
+            }
+    )
 
     @GetMapping
     public ResponseEntity<String> obtain() {

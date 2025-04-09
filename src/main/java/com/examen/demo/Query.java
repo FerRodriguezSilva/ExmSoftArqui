@@ -1,5 +1,9 @@
 package com.examen.demo;
 
-public interface Query<I, O> {
-    O execute(I input);
+
+import org.springframework.http.ResponseEntity;
+
+
+public interface Query <I, O> {
+    ResponseEntity<O> execute(I input);
 }
