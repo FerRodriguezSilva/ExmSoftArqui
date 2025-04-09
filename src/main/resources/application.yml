@@ -1,0 +1,9 @@
+spring:
+  application.name: Examen
+  datasource:
+    url: jdbc:mysql://localhost:3306/dbexmarqui
+    username: root
+    password: nicolores
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  server:
+    port: 9090
